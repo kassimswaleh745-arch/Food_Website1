@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== BASIC SETUP ========== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food App - Login & Sign Up</title>
+
+    <!-- ========== STYLING ========== -->
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #FFF8F0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        /* ===== LOGO ===== */
+        .logo {
+            display: block;
+            width: 72px;
+            margin: 0 auto 10px;
+        }
+
+        /* ===== TITLES ===== */
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* ===== FORM FIELDS ===== */
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #fafafa;
+            margin-top: 5px;
+        }
+
+        input:focus {
+            border-color: #F97316;
+            outline: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        /* ===== BUTTON ===== */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #F97316;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ===== SWITCH LINKS ===== */
+        .switch {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .switch a {
+            color: #F97316;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* ===== HIDDEN ELEMENTS ===== */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== LOGO ===== -->
+        <img src="image/download.png" alt="Logo" class="logo">
+
+        <!-- ===== LOGIN FORM ===== -->
+        <div id="loginForm">
+            <h1 class="title">Welcome Back</h1>
+            <p class="subtitle">Sign in to your account</p>
+            <form onsubmit="return handleLogin(event)">
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail">
+                    <p class="error" id="loginEmailErr">Invalid email</p>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword">
+                    <p class="error" id="loginPassErr">Minimum 6 characters</p>
+                </div>
+                <button class="btn">Login</button>
+            </form>
+            <p class="switch">
+                No account? <a onclick="showSignup()">Sign Up</a>
+            </p>
+        </div>
+
+        <!-- ===== SIGNUP FORM ===== -->
+        <div id="signupForm" class="hidden">
+            <h1 class="title">Create Account</h1>
+            <form onsubmit="return handleSignup(event)">
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName">
+                    <p class="error" id="signupNameErr">Required</p>
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail">
+                    <p class="error" id="signupEmailErr">Invalid email</p>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword">
+                    <p class="error" id="signupPassErr">Min 6 characters</p>
+                </div>
+                <div class="field">
+                    <label>Confirm Password</label>
+                    <input type="password" id="signupConfirm">
+                    <p class="error" id="signupConfirmErr">Passwords don't match</p>
+                </div>
+                <button class="btn">Sign Up</button>
+            </form>
+            <p class="switch">
+                Already have account? <a onclick="showLogin()">Login</a>
+            </p>
+        </div>
+
+        <!-- ===== SUCCESS MESSAGE ===== -->
+        <div id="successMsg" class="hidden" style="text-align:center;">
+            <h2>✅ Account Created!</h2>
+            <button class="btn" onclick="showLogin()">Go to Login</button>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPT ===== -->
+    <script>
+        // ===== ELEMENT REFERENCES =====
+        const loginForm = document.getElementById("loginForm");
+        const signupForm = document.getElementById("signupForm");
+        const successMsg = document.getElementById("successMsg");
+
+        // ===== SWITCH FORMS =====
+        function showLogin() {
+            loginForm.classList.remove("hidden");
+            signupForm.classList.add("hidden");
+            successMsg.classList.add("hidden");
+        }
+
+        function showSignup() {
+            loginForm.classList.add("hidden");
+            signupForm.classList.remove("hidden");
+            successMsg.classList.add("hidden");
+        }
+
+        // ===== SHOW OR HIDE ERROR =====
+        function showErr(id, show) {
+            document.getElementById(id).style.display = show ? "block" : "none";
+        }
+
+        // ===== LOGIN VALIDATION =====
+        function handleLogin(e) {
+            e.preventDefault();
+            let email = document.getElementById("loginEmail").value.trim();
+            let password = document.getElementById("loginPassword").value;
+            let valid = true;
+
+            if (!email.includes("@")) { showErr("loginEmailErr", true); valid = false; }
+            else { showErr("loginEmailErr", false); }
+
+            if (password.length < 6) { showErr("loginPassErr", true); valid = false; }
+            else { showErr("loginPassErr", false); }
+
+            if (valid) {
+                alert("Login successful!");
+                loginForm.reset;
+            }
+        }
+
+        // ===== SIGNUP VALIDATION =====
+        function handleSignup(e) {
+            e.preventDefault();
+            let name = document.getElementById("signupName").value.trim();
+            let password = document.getElementById("signupPassword").value;
+            let confirm = document.getElementById("signupConfirm").value;
+            let valid = true;
+
+            if (!name) { showErr("signupNameErr", true); valid = false; }
+            else { showErr("signupNameErr", false); }
+
+            if (password.length < 6) { showErr("signupPassErr", true); valid = false; }
+            else { showErr("signupPassErr", false); }
+
+            if (password !== confirm) { showErr("signupConfirmErr", true); valid = false; }
+            else { showErr("signupConfirmErr", false); }
+
+            if (valid) {
+                signupForm.classList.add("hidden");
+                successMsg.classList.remove("hidden");
+            }
+        }
+    </script>
+</body>
+</html>

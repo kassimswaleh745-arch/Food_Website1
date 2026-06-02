@@ -1,0 +1,466 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+/* ================= NAVBAR ================= */
+section nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+section nav .logo img{
+    width: 120px;
+}
+
+section nav ul{
+    list-style: none;
+}
+
+section nav ul li{
+    display: inline-block;
+    margin: 0 15px;
+}
+
+section nav ul li a{
+    color: #000;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+section nav ul li a:hover,
+section nav ul li a.action{
+    color: #facc22;
+}
+
+section nav .login a{
+    background: #facc22;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+section nav .login a:hover{
+    background: #000;
+    text-align: bold;
+}
+
+/* ================= MAIN ================= */
+section{
+    padding-top: 100px;
+}
+
+section .main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: calc(100vh - 100px);
+}
+
+section .main .main_text h1{
+    font-size: 70px;
+    color: #000;
+}
+
+section .main .main_text h1 span{
+    color: #facc22;
+}
+
+section .main .main_text p{
+    width: 600px;
+    margin-top: 20px;
+    line-height: 25px;
+}
+
+section .main .main_text .btn{
+    display: inline-block;
+    margin-top: 30px;
+    background: #facc22;
+    color: #000;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+section .main .main_text .btn i{
+    margin-right: 8px;
+}
+
+section .main .main_text .btn:hover{
+    background: #000;
+    color: #fff;
+}
+
+/* MAIN IMAGE */
+section .main .main_image img{
+    width: 600px;
+    border-radius: 30% 50% 60% 60%;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+    animation: animate 6s ease-in-out infinite;
+    color: #;
+}
+
+/* ================= ABOUT ================= */
+.about{
+    width: 100%;
+    height: 100vh;
+    padding: 80px 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.about .about_main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.about .about_main .about_image img{
+    width: 600px;
+    height: 500px;
+    border-radius: 30px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+    transition: 0.4s;
+}
+
+.about .about_main .about_image img:hover{
+    transform: scale(1.05);
+}
+
+.about .about_main .about_text h1{
+    font-size: 45px;
+}
+
+.about .about_main .about_text h1 span{
+    color: #facc22;
+}
+
+.about .about_main .about_text h3{
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.about .about_main .about_text p{
+    width: 650px;
+    margin-top: 20px;
+    line-height: 23px;
+    text-align: justify;
+}
+
+.about .about_main .about_text .about_services{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.about .about_main .about_text .about_services .s_1{
+    display: flex;
+    align-items: center;
+    width: 180px;
+    background: #ececec;
+    padding: 10px;
+    border: 2px solid #facc22;
+    cursor: pointer;
+}
+
+.about .about_main .about_text .about_services .s_1 i{
+    color: #000;
+    margin: 5px 10px 5px 5px;
+    font-size: 20px;
+    transition: 0.3s;
+}
+.about .about_main .about_text .about_services .s_1:hover i{
+    color: #facc22;
+}
+.about .about_main .about_text .about_services .s_1 a{
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+}
+
+.about .about_main .about_text .about_btn{
+    position: relative;
+    top: 35px;
+    padding: 10px 20px;
+    border: 2px solid #facc22;
+    text-decoration: none;
+    color: #000;
+    z-index: 5;
+    transition: 0.3s;
+}
+
+.about .about_main .about_text .about_btn:hover{
+    color: #fff;
+}
+.about .about_main .about_text .about_btn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    z-index: -1;
+    background: #facc22;
+    transition: 0.3s;
+}
+.about .about_main .about_text .about_btn:hover::before{
+    top: unset;
+    width: 100%;
+    bottom: 0;
+}
+
+/* ================= MENU ================= */
+.menu h1{
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 50px;
+    gap: 0;
+}
+
+.menu h1 span{
+    color: #facc22;
+}
+
+.menu .menu_box{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 0 60px;
+}
+
+.menu .menu_card{
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.menu .menu_card:hover{
+    transform: translateY(-10px);
+}
+
+.menu .menu_img img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.menu .menu_text{
+    padding: 20px;
+    text-align: center;
+}
+
+.menu .menu_text h2{
+    font-size: 25px;
+}
+
+.menu .menu_text p{
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.menu .menu_icon i{
+    color: #facc22;
+}
+
+.menu .price{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.menu .price del{
+    color: red;
+}
+
+.menu .menu_btn{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 25px;
+    background: #facc22;
+    color: #000;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.menu .menu_btn:hover{
+    background: #000;
+    color: #fff;
+}
+
+
+/* ================= GALLERY ================= */
+.gallery{
+    padding:80px 60px;
+    background:#f9f9f9;
+    gap: 0;
+}
+
+.gallery h1{
+    text-align:center;
+    font-size:45px;
+    margin-bottom:40px;
+}
+
+.gallery h1 span{
+    color:#facc22;
+}
+
+.gallery_box{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap: 25px;
+}
+
+.gallery_box img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.gallery_box img:hover{
+    transform:scale(1.05);
+}
+
+
+.contact{
+    padding: 80px 60px;
+    text-align: center;
+    background: url("OIP(2).webp") center center;
+    background-size: cover;
+    color: #0f0f0f; 
+}
+
+.contact h1{
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
+.contact h1 span{
+    color:#facc22;
+}
+
+.contact_form{
+    max-width: 600px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.contact_form input,
+.contact_form textarea{
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.contact_form textarea{
+    height: 150px;
+}
+
+.contact_form button{
+    padding: 12px 30px;
+    border: none;
+    background: #facc22;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact_form button:hover{
+    background: #000;
+    color: #fff;
+}
+
+/* ================= BACK TO TOP ================= */
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #facc22;
+    color: #000;
+    padding: 10px 15px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 20px;
+    display: none;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.back-to-top:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* ================= ANIMATION ================= */
+@keyframes animate{
+    0%{transform: scale(1.05);}
+    50%{transform: scale(1);}
+    100%{transform: scale(1.05);}
+}
+
+section, .about, .menu, .gallery, .contact{
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width: 768px){
+    section .main{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    section .main .main_text p,
+    .about .about_main .about_text p{
+        width: 100%;
+    }
+
+    section .main .main_image img,
+    .about .about_main .about_image img{
+        width: 90%;
+        margin-top: 30px;
+    }
+
+    section nav{
+        padding: 0 30px;
+    }
+
+    .menu .menu_box,
+    .gallery_box{
+        grid-template-columns: 1fr;
+    }
+}
+

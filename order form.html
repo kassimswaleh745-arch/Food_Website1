@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order Registration</title>
+
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            background: #fff;
+            width: 100%;
+            max-width: 450px;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .title h1 {
+            font-size: 26px;
+        }
+
+        .title p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* ===== FORM ===== */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+
+        input:focus, select:focus {
+            border-color: #f97316;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        /* ===== BUTTON ===== */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background: #f97316;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ===== ERROR ===== */
+        .error {
+            font-size: 12px;
+            color: red;
+            display: none;
+        }
+
+        /* ===== SUCCESS ===== */
+        .success {
+            text-align: center;
+            display: none;
+        }
+
+        .success h2 {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="title">
+        <h1>Order Your Food</h1>
+        <p>Fill the form below to place your order</p>
+    </div>
+
+    <!-- ===== FORM ===== -->
+    <form id="form">
+
+        <!-- NAME -->
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+            <p class="error" id="nameErr">Name is required</p>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter your email">
+            <p class="error" id="emailErr">Invalid email</p>
+        </div>
+
+        <!-- PHONE -->
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter phone number">
+            <p class="error" id="phoneErr">Phone is required</p>
+        </div>
+
+        <!-- MESSAGE -->
+        <div class="form-group">
+            <label>Your Order</label>
+            <textarea id="message" placeholder="What do you want to order?"></textarea>
+        </div>
+
+        <!-- PAYMENT METHOD -->
+        <div class="form-group">
+            <label>Payment Method</label>
+            <select id="payment">
+                <option value="">Select method</option>
+                <option value="mpesa">M-Pesa</option>
+                <option value="card">Card</option>
+                <option value="cash">Cash on Delivery</option>
+            </select>
+            <p class="error" id="paymentErr">Select payment method</p>
+        </div>
+
+        <!-- AMOUNT -->
+        <div class="form-group">
+            <label>Amount ($)</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+            <p class="error" id="amountErr">Enter valid amount</p>
+        </div>
+
+        <button class="btn">Submit Order</button>
+
+    </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="success" id="successBox">
+        <h2>✅ Order Successful</h2>
+        <p>Your order and payment have been received.</p>
+    </div>
+
+</div>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+
+    const form = document.getElementById("form");
+    const successBox = document.getElementById("successBox");
+
+    function showError(id, condition) {
+        document.getElementById(id).style.display = condition ? "block" : "none";
+    }
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let payment = document.getElementById("payment").value;
+        let amount = document.getElementById("amount").value;
+
+        let valid = true;
+
+        if (!name) { showError("nameErr", true); valid = false; }
+        else showError("nameErr", false);
+
+        if (!email.includes("@")) { showError("emailErr", true); valid = false; }
+        else showError("emailErr", false);
+
+        if (!phone) { showError("phoneErr", true); valid = false; }
+        else showError("phoneErr", false);
+
+        if (!payment) { showError("paymentErr", true); valid = false; }
+        else showError("paymentErr", false);
+
+        if (!amount || amount <= 0) { showError("amountErr", true); valid = false; }
+        else showError("amountErr", false);
+
+        if (valid) {
+            form.style.display = "none";
+            successBox.style.display = "block";
+
+            console.log({
+                name, email, phone, payment, amount
+            });
+        }
+    });
+
+</script>
+
+</body>
+</html>

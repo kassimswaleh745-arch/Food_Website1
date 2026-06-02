@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food App Login, Signup & Order</title>
+
+<style>
+/* ===== RESET ===== */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #FFF8F0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+/* ===== SECTION STYLING ===== */
+.section {
+    display:none;
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    width:100%;
+    max-width:420px;
+}
+
+/* ACTIVE SECTION */
+.active { display:block; }
+
+/* ===== INPUT & BUTTON ===== */
+input, select, textarea, button {
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    border-radius:10px;
+    border:2px solid #eee;
+}
+
+input:focus, select:focus, textarea:focus { border-color:#f97316; outline:none; }
+
+button {
+    background:#f97316;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+button:hover { opacity:0.9; }
+
+/* ===== ERROR & SUCCESS ===== */
+.error { font-size:12px; color:red; display:none; }
+.success { text-align:center; display:none; }
+.success h2 { margin-bottom:10px; }
+
+/* ===== SWITCH LINK ===== */
+p.switch { text-align:center; margin-top:10px; }
+p.switch a { color:#f97316; cursor:pointer; font-weight:600; }
+
+</style>
+</head>
+<body>
+
+<!-- ================= HOME PAGE ================= -->
+<div id="home" class="section active">
+    <h2 style="text-align:center;">🍔 Welcome to Food App</h2>
+    <p style="text-align:center;">Click below to order your food</p>
+    <button onclick="goToOrder()">Order Now</button>
+</div>
+
+<!-- ================= LOGIN ================= -->
+<div id="login" class="section">
+    <h2>Login</h2>
+    <form onsubmit="return handleLogin(event)">
+        <input type="email" id="loginEmail" placeholder="Email">
+        <p class="error" id="loginEmailErr">Invalid email</p>
+
+        <input type="password" id="loginPassword" placeholder="Password">
+        <p class="error" id="loginPassErr">Minimum 6 characters</p>
+
+        <button>Login</button>
+    </form>
+    <p class="switch">No account? <a onclick="showSignup()">Sign Up</a></p>
+</div>
+
+<!-- ================= SIGNUP ================= -->
+<div id="signup" class="section">
+    <h2>Sign Up</h2>
+    <form onsubmit="return handleSignup(event)">
+        <input type="text" id="signupName" placeholder="Full Name">
+        <p class="error" id="signupNameErr">Required</p>
+
+        <input type="email" id="signupEmail" placeholder="Email">
+        <p class="error" id="signupEmailErr">Invalid email</p>
+
+        <input type="password" id="signupPassword" placeholder="Password">
+        <p class="error" id="signupPassErr">Min 6 characters</p>
+
+        <input type="password" id="signupConfirm" placeholder="Confirm Password">
+        <p class="error" id="signupConfirmErr">Passwords don't match</p>
+
+        <button>Sign Up</button>
+    </form>
+    <p class="switch">Already have account? <a onclick="showLogin()">Login</a></p>
+</div>
+
+<!-- ================= ORDER ================= -->
+<div id="order" class="section">
+    <h2>🍕 Place Order</h2>
+    <form id="orderForm">
+        <input type="text" id="orderName" placeholder="Full Name">
+        <p class="error" id="nameErr">Name is required</p>
+
+        <input type="email" id="orderEmail" placeholder="Email">
+        <p class="error" id="emailErr">Invalid email</p>
+
+        <input type="tel" id="phone" placeholder="Phone Number">
+        <p class="error" id="phoneErr">Phone is required</p>
+
+        <textarea id="message" placeholder="What do you want to order?"></textarea>
+
+        <select id="payment">
+            <option value="">Select payment method</option>
+            <option value="mpesa">M-Pesa</option>
+            <option value="card">Card</option>
+            <option value="cash">Cash on Delivery</option>
+        </select>
+        <p class="error" id="paymentErr">Select payment method</p>
+
+        <input type="number" id="amount" placeholder="Enter amount">
+        <p class="error" id="amountErr">Enter valid amount</p>
+
+        <button>Submit Order</button>
+    </form>
+
+    <div class="success" id="successBox">
+        <h2>✅ Order Successful</h2>
+        <p>Your order and payment have been received.</p>
+    </div>
+
+    <button style="margin-top:15px;" onclick="logout()">Logout</button>
+</div>
+
+<script>
+// ================= HELPER FUNCTION TO SWITCH SECTIONS ================
+function showSection(id){
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+// ================= NAVIGATION =================
+function goToOrder(){
+    let isLoggedIn = localStorage.getItem("userLoggedIn");
+    if(isLoggedIn === "true") showSection("order"); // user logged in -> go to order
+    else showSection("login"); // not logged in -> go to login
+}
+
+function showSignup(){ showSection("signup"); }
+function showLogin(){ showSection("login"); }
+
+// ================= LOGIN HANDLER =================
+function handleLogin(e){
+    e.preventDefault();
+    let email = document.getElementById("loginEmail").value.trim();
+    let password = document.getElementById("loginPassword").value;
+    let valid=true;
+
+    // EMAIL VALIDATION
+    if(!email.includes("@")){ 
+        document.getElementById("loginEmailErr").style.display="block"; 
+        valid=false;
+    } else document.getElementById("loginEmailErr").style.display="none";
+
+    // PASSWORD VALIDATION
+    if(password.length<6){ 
+        document.getElementById("loginPassErr").style.display="block"; 
+        valid=false;
+    } else document.getElementById("loginPassErr").style.display="none";
+
+    // IF VALID -> LOGIN SUCCESS
+    if(valid){
+        localStorage.setItem("userLoggedIn","true"); // mark as logged in
+        showSection("order"); // go to order page
+    }
+}
+
+// ================= SIGNUP HANDLER =================
+function handleSignup(e){
+    e.preventDefault();
+    let name = document.getElementById("signupName").value.trim();
+    let email = document.getElementById("signupEmail").value.trim();
+    let password = document.getElementById("signupPassword").value;
+    let confirm = document.getElementById("signupConfirm").value;
+    let valid=true;
+
+    if(!name){ document.getElementById("signupNameErr").style.display="block"; valid=false;}
+    else document.getElementById("signupNameErr").style.display="none";
+
+    if(!email.includes("@")){ document.getElementById("signupEmailErr").style.display="block"; valid=false;}
+    else document.getElementById("signupEmailErr").style.display="none";
+
+    if(password.length<6){ document.getElementById("signupPassErr").style.display="block"; valid=false;}
+    else document.getElementById("signupPassErr").style.display="none";
+
+    if(password!==confirm){ document.getElementById("signupConfirmErr").style.display="block"; valid=false;}
+    else document.getElementById("signupConfirmErr").style.display="none";
+
+    if(valid){
+        localStorage.setItem("userLoggedIn","true"); // mark as logged in
+        showSection("order"); // go to order page
+    }
+}
+
+// ================= ORDER FORM HANDLER =================
+const orderForm = document.getElementById("orderForm");
+const successBox = document.getElementById("successBox");
+
+orderForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    let name=document.getElementById("orderName").value.trim();
+    let email=document.getElementById("orderEmail").value.trim();
+    let phone=document.getElementById("phone").value.trim();
+    let payment=document.getElementById("payment").value;
+    let amount=document.getElementById("amount").value;
+
+    let valid=true;
+
+    if(!name){ document.getElementById("nameErr").style.display="block"; valid=false;} else document.getElementById("nameErr").style.display="none";
+    if(!email.includes("@")){ document.getElementById("emailErr").style.display="block"; valid=false;} else document.getElementById("emailErr").style.display="none";
+    if(!phone){ document.getElementById("phoneErr").style.display="block"; valid=false;} else document.getElementById("phoneErr").style.display="none";
+    if(!payment){ document.getElementById("paymentErr").style.display="block"; valid=false;} else document.getElementById("paymentErr").style.display="none";
+    if(!amount || amount<=0){ document.getElementById("amountErr").style.display="block"; valid=false;} else document.getElementById("amountErr").style.display="none";
+
+    if(valid){
+        orderForm.style.display="none";
+        successBox.style.display="block";
+        console.log({name,email,phone,payment,amount});
+    }
+});
+
+// ================= LOGOUT =================
+function logout(){
+    localStorage.removeItem("userLoggedIn");
+    showSection("home");
+}
+
+// ================= AUTO LOAD CHECK =================
+window.onload = function(){
+    if(localStorage.getItem("userLoggedIn")==="true") showSection("order");
+    else showSection("home");
+}
+</script>
+
+</body>
+</html>

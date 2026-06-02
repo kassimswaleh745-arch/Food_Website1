@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px 36px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(234, 120, 23, 0.15), 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .logo-wrapper img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .form-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            font-size: 15px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            color: #1a1a1a;
+            background: #fafafa;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+            background: #fff;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .role-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .role-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .role-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .role-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 14px 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .role-option label .role-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .role-option label .role-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .role-option label .role-desc {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .role-option input[type="radio"]:checked + label {
+            border-color: #f97316;
+            background: #fff7ed;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s;
+            margin-top: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message .check-icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+        }
+
+        .success-message h2 {
+            font-size: 22px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .error-text {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            .form-container { padding: 28px 20px; }
+            .role-options { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="logo-wrapper">
+        <img src="image/download.png" alt="food">
+    </div>
+
+    <div class="form-header">
+        <h1>Join Us</h1>
+        <p>Whether you are a talented chef or a hungry client we want to hear from you</p>
+    </div>
+
+    <form id="registrationForm">
+        <div class="form-group">
+            <label>I am a:</label>
+            <div class="role-options">
+                <div class="role-option">
+                    <input type="radio" name="role" id="client" value="Hungry Client" checked>
+                    <label for="client">
+                        <span class="role-icon">🍽️</span>
+                        <span class="role-title">Hungry Client</span>
+                        <span class="role-desc">Order Food</span>
+                    </label>
+                </div>
+                <div class="role-option">
+                    <input type="radio" name="role" id="applicant" value="Job Applicant">
+                    <label for="applicant">
+                        <span class="role-icon">👨‍🍳</span>
+                        <span class="role-title">Job Applicant</span>
+                        <span class="role-desc">Join the Team</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="Enter your full name" required>
+            <div class="error-text" id="nameError">Please enter your full name</div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email address" required>
+            <div class="error-text" id="emailError">Please enter a valid email address</div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+            <div class="error-text" id="phoneError">Please enter your phone number</div>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Tell Us More <span style="color:#9ca3af; font-weight:400;">(Your order or experience)</span></label>
+            <textarea id="message" placeholder="Tell us about your order or experience..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+        <div class="check-icon">✅</div>
+        <h2>Thank You!</h2>
+        <p>Your registration has been submitted successfully. We'll get back to you soon!</p>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const successMessage = document.getElementById('successMessage');
+
+    function showError(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function hideError(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    // Real-time validation
+    document.getElementById('fullName').addEventListener('input', function() {
+        this.value.trim() ? hideError('nameError') : showError('nameError');
+    });
+
+    document.getElementById('email').addEventListener('input', function() {
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value.trim()) ? hideError('emailError') : showError('emailError');
+    });
+
+    document.getElementById('phone').addEventListener('input', function() {
+        this.value.trim() ? hideError('phoneError') : showError('phoneError');
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let valid = true;
+
+        const name = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const role = document.querySelector('input[name="role"]:checked').value;
+        const message = document.getElementById('message').value.trim();
+
+        if (!name) { showError('nameError'); valid = false; } else { hideError('nameError'); }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('emailError'); valid = false; } else { hideError('emailError'); }
+        if (!phone) { showError('phoneError'); valid = false; } else { hideError('phoneError'); }
+
+        if (valid) {
+            console.log('Registration Data:', { role, name, email, phone, message });
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>
