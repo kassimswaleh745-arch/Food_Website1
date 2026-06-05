@@ -7,8 +7,6 @@
     <title>Food Website</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="">
-    <link rel="stylesheet" href="">
     <link rel="shortcut icon" href="download.png">
 
     <link rel="stylesheet"
@@ -16,7 +14,7 @@
 </head>
 <body>
 
-<section id="Home">
+<section id="Home" class="home">
 
     <!-- NAVBAR -->
     <nav>
@@ -26,7 +24,7 @@
             </a>
         </div>
 
-        <ul>
+        <ul id="nav-links">
             <li><a href="#Home" class="action">Home</a></li>
             <li><a href="#About">About</a></li>
             <li><a href="#Menu">Menu</a></li>
@@ -34,6 +32,9 @@
             <li><a href="#contact">Contact Us</a></li>
         </ul>
 
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
         <div class="login">
             <a href="login.html">Login</a>
         </div>
@@ -47,15 +48,16 @@
             <p>
                 Why settle for average when you can have extraordinary? <br>
                 Enjoy chef-crafted meals made from the finest ingredients delivered hot and fresh to your doorstep and
-                Your next favorite meal is just one tap away <br>
+                your next favorite meal is just one tap away.
+            </p>
 
             <a href="login & signup form.html" class="btn">
-    <i class="fa-solid fa-burger"></i> Order My Feast
+                <i class="fa-solid fa-burger"></i> Order My Feast
             </a>
         </div>
 
         <div class="main_image">
-            <img src="photo-1611250188496-e966043a0629.avif" alt="food">
+            <img src="photo-1611250188496-e966043a0629.avif" alt="food" loading="lazy">
         </div>
     </div>
 
@@ -66,7 +68,7 @@
 <div id="About" class="about">
     <div class="about_main">
         <div class="about_image">
-            <img src="photo-1546069901-ba9599a7e63c.avif">
+            <img src="photo-1546069901-ba9599a7e63c.avif" loading="lazy">
         </div>
         <div class="about_text">
             <h1><span>About</span>Us</h1>
@@ -113,7 +115,7 @@
             <div class="menu_card">
 
                 <div class="menu_img">
-                    <img src="premium_photo-1683619761492-639240d29bb5.avif">
+                    <img src="premium_photo-1683619761492-639240d29bb5.avif" loading="lazy">
                 </div>
 
                 <div class="menu_text">
@@ -141,7 +143,7 @@
             <div class="menu_card">
 
                 <div class="menu_img">
-                    <img src="photo-1560512823-829485b8bf24.avif">
+                    <img src="photo-1560512823-829485b8bf24.avif" loading="lazy">
                 </div>
 
                 <div class="menu_text">
@@ -166,7 +168,7 @@
             <div class="menu_card">
 
                 <div class="menu_img">
-                    <img src="premium_photo-1667682942060-977925f9a54b.avif">
+                    <img src="premium_photo-1667682942060-977925f9a54b.avif" loading="lazy">
                 </div>
 
                 <div class="menu_text">
@@ -196,17 +198,17 @@
 <div id="Gallery" class="gallery">
     <h1>Our <span>Gallery</span></h1>
     <div class="gallery_box">
-        <img src="photo-1554520735-0a6b8b6ce8b7.avif">
-        <img src="photo-1459789034005-ba29c5783491.avif">
-        <img src="photo-1467003909585-2f8a72700288.avif">
-        <img src="photo-1484723091739-30a097e8f929.avif">
-        <img src="photo-1565299624946-b28f40a0ae38.avif">
-        <img src="photo-1610970878459-a0e464d7592b.avif">
+        <img src="photo-1554520735-0a6b8b6ce8b7.avif" loading="lazy">
+        <img src="photo-1459789034005-ba29c5783491.avif" loading="lazy">
+        <img src="photo-1467003909585-2f8a72700288.avif" loading="lazy">
+        <img src="photo-1484723091739-30a097e8f929.avif" loading="lazy">
+        <img src="photo-1565299624946-b28f40a0ae38.avif" loading="lazy">
+        <img src="photo-1610970878459-a0e464d7592b.avif" loading="lazy">
     </div>
 </div>
 
 <!-- Contact Us -->
-<div id="Contact" class="contact us">
+<div id="contact" class="contact us">
     <h1>Contact <span>Us</span></h1>
     <div class="contact_form">
         <input type="text" placeholder="Your Name">

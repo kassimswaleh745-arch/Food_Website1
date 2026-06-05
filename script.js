@@ -40,10 +40,20 @@ window.addEventListener("scroll", () => {
 
 // Back to top button
 const backTop = document.querySelector(".back-to-top");
-window.addEventListener("scroll", () => {
-  if(window.scrollY > 500){
-    backTop.style.display = "block";
-  } else {
-    backTop.style.display = "none";
-  }
+
+if(backTop){
+    window.addEventListener("scroll", () => {
+        if(window.scrollY > 500){
+            backTop.style.display = "block";
+        } else {
+            backTop.style.display = "none";
+        }
+    });
+}
+
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-links");
+
+menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
 });
